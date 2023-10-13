@@ -271,6 +271,7 @@ def train():
 
 if __name__ == '__main__':
     """1 point"""
-    # Train your TwoLayer Net!
+    # Train your TwoLayer Net! 
+    # Test accuracy must be > 0.33
     # Save report to output/seminar3
     train()
