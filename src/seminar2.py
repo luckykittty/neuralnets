@@ -132,6 +132,7 @@ class SoftmaxClassifier:
         return accuracy
 
 
+
 def train():
     # TODO 5: Find the best hyperparameters
     # assert test accuracy > 0.22

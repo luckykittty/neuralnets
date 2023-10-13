@@ -48,7 +48,7 @@ def check_gradient(f, x, delta=1e-5, tol=1e-4):
     return True
 
 
-def get_preprocessed_data(include_bias=True):
+def get_preprocessed_data(include_bias=True, local_data=True):
     import tensorflow as tf
     (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
     y_train = y_train.ravel()
