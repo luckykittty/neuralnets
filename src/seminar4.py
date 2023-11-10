@@ -35,7 +35,8 @@ class SGD(Optimizer):
     def step(self, w, d_w, learning_rate):
         w -= learning_rate*d_w
         # TODO Update W with d_W
-        pass
+        return w
+        #pass
 
 
 class Momentum(Optimizer):
