@@ -22,7 +22,7 @@ PATH_TO_TEST_DATA = 'data/raw/spam_test.csv'
 PATH_TO_MODEL = 'models/model_7'
 BUCKET_NAME = 'neuralnets2023'
 # todo fix your git user name
-YOUR_GIT_USER = 'labintsev'
+YOUR_GIT_USER = 'luckykittty'
 
 
 def download_data():
@@ -42,13 +42,14 @@ def make_model():
     :return:
     """
     inputs = tf.keras.layers.Input(name='inputs', shape=[MAX_SEQ_LEN])
-    x = tf.keras.layers.Embedding(MAX_WORDS, output_dim=4, input_length=MAX_SEQ_LEN)(inputs)
-    x = tf.keras.layers.SimpleRNN(units=4)(x)
-    x = tf.keras.layers.Dense(1, name='out_layer')(x)
-    x = tf.keras.layers.Activation('sigmoid')(x)
+    x = tf.keras.layers.Embedding(MAX_WORDS, output_dim=128, input_length=MAX_SEQ_LEN)(inputs)
+    x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64, activation='tanh', return_sequences=True))(x)
+    x = tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(64))(x)
+    x = tf.keras.layers.Flatten()(x)
+    x = tf.keras.layers.Dense(32, activation='relu')(x)
+    x = tf.keras.layers.Dense(1, activation='sigmoid')(x)
     recurrent_model = tf.keras.Model(inputs=inputs, outputs=x)
     return recurrent_model
-
 
 def load_data(csv_path='data/raw/spam.csv') -> tuple:
     df = pd.read_csv(csv_path)
